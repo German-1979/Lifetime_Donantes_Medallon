@@ -1,0 +1,109 @@
+[2025-11-13T20:07:32.798+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-13T20:07:32.882+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-12T00:00:00+00:00 [queued]>
+[2025-11-13T20:07:32.899+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-12T00:00:00+00:00 [queued]>
+[2025-11-13T20:07:32.900+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-11-13T20:07:32.919+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): procesar_gold> on 2025-11-12 00:00:00+00:00
+[2025-11-13T20:07:32.972+0000] {standard_task_runner.py:64} INFO - Started process 318 to run task
+[2025-11-13T20:07:32.976+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_donaciones_dag', 'procesar_gold', 'scheduled__2025-11-12T00:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/etl_donaciones_dag.py', '--cfg-path', '/tmp/tmpe3cd55le']
+[2025-11-13T20:07:32.981+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask procesar_gold
+[2025-11-13T20:07:33.081+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-12T00:00:00+00:00 [running]> on host b9eedff8ec6c
+[2025-11-13T20:07:33.253+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='german' AIRFLOW_CTX_DAG_ID='etl_donaciones_dag' AIRFLOW_CTX_TASK_ID='procesar_gold' AIRFLOW_CTX_EXECUTION_DATE='2025-11-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-12T00:00:00+00:00'
+[2025-11-13T20:07:33.257+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-13T20:07:33.308+0000] {logging_mixin.py:188} INFO - ✓ Archivo encontrado en Silver: /opt/***/scripts/../layer/silver/donantes_silver.parquet
+[2025-11-13T20:07:33.588+0000] {logging_mixin.py:188} INFO - ✓ Archivo leído correctamente. Registros cargados: 18000
+[2025-11-13T20:07:41.402+0000] {logging_mixin.py:188} INFO - ✓ Datos Gold guardados en: /opt/***/scripts/../layer/gold
+[2025-11-13T20:07:41.408+0000] {logging_mixin.py:188} INFO - ✓ Archivo indicador creado: /opt/***/scripts/../layer/gold/donantes_gold.py
+[2025-11-13T20:07:41.409+0000] {logging_mixin.py:188} INFO - ✅ Proceso Gold finalizado correctamente.
+[2025-11-13T20:07:41.429+0000] {python.py:237} INFO - Done. Returned value was: (Mes 1     117863000.0
+Mes 2     108838000.0
+Mes 3     101111000.0
+Mes 4      92878000.0
+Mes 5      84557000.0
+Mes 6      78111000.0
+Mes 7      70064000.0
+Mes 8      62426000.0
+Mes 9      55387000.0
+Mes 10     48538000.0
+Mes 11     42884000.0
+Mes 12     35985000.0
+Mes 13     30040000.0
+Mes 14     25233000.0
+Mes 15     19328000.0
+Mes 16     14582000.0
+Mes 17      9397000.0
+Mes 18      4765000.0
+dtype: float64, Mes 1     13833
+Mes 2     12738
+Mes 3     11821
+Mes 4     10856
+Mes 5      9860
+Mes 6      9115
+Mes 7      8199
+Mes 8      7293
+Mes 9      6472
+Mes 10     5674
+Mes 11     5024
+Mes 12     4227
+Mes 13     3550
+Mes 14     2969
+Mes 15     2281
+Mes 16     1716
+Mes 17     1084
+Mes 18      556
+dtype: int64)
+[2025-11-13T20:07:41.437+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-13T20:07:41.457+0000] {xcom.py:675} ERROR - Object of type tuple is not JSON serializable. If you are using pickle instead of JSON for XCom, then you need to enable pickle support for XCom in your *** config or make sure to decorate your object with attr.
+[2025-11-13T20:07:41.459+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/json.py", line 91, in default
+    return serialize(o)
+           ^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/serialization/serde.py", line 150, in serialize
+    return encode(classname or serialized_classname, version, serialize(data, depth + 1))
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/serialization/serde.py", line 127, in serialize
+    return [serialize(d, depth + 1) for d in o]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/serialization/serde.py", line 127, in <listcomp>
+    return [serialize(d, depth + 1) for d in o]
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/serialization/serde.py", line 189, in serialize
+    raise TypeError(f"cannot serialize object of type {cls}")
+TypeError: cannot serialize object of type <class 'pandas.core.series.Series'>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 486, in _execute_task
+    task_instance.xcom_push(key=XCOM_RETURN_KEY, value=xcom_value, session=session)
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/session.py", line 76, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 3197, in xcom_push
+    XCom.set(
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/session.py", line 76, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/xcom.py", line 246, in set
+    value = cls.serialize_value(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/xcom.py", line 673, in serialize_value
+    return json.dumps(value, cls=XComEncoder).encode("UTF-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/json.py", line 102, in encode
+    o = self.default(o)
+        ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/json.py", line 93, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type tuple is not JSON serializable
+[2025-11-13T20:07:41.484+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_donaciones_dag, task_id=procesar_gold, run_id=scheduled__2025-11-12T00:00:00+00:00, execution_date=20251112T000000, start_date=20251113T200732, end_date=20251113T200741
+[2025-11-13T20:07:41.509+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 8 for task procesar_gold (Object of type tuple is not JSON serializable; 318)
+[2025-11-13T20:07:41.546+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-11-13T20:07:41.571+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-13T20:07:41.574+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

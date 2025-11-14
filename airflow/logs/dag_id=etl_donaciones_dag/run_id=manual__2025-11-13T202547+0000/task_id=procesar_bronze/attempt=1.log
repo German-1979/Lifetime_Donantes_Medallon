@@ -1,0 +1,37 @@
+[2025-11-13T20:26:12.387+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-13T20:26:12.554+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_bronze manual__2025-11-13T20:25:47+00:00 [queued]>
+[2025-11-13T20:26:12.583+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_bronze manual__2025-11-13T20:25:47+00:00 [queued]>
+[2025-11-13T20:26:12.585+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-13T20:26:12.633+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): procesar_bronze> on 2025-11-13 20:25:47+00:00
+[2025-11-13T20:26:12.696+0000] {standard_task_runner.py:64} INFO - Started process 390 to run task
+[2025-11-13T20:26:12.714+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_donaciones_dag', 'procesar_bronze', 'manual__2025-11-13T20:25:47+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/etl_donaciones_dag.py', '--cfg-path', '/tmp/tmpxd1x82p4']
+[2025-11-13T20:26:12.754+0000] {standard_task_runner.py:91} INFO - Job 15: Subtask procesar_bronze
+[2025-11-13T20:26:13.036+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_donaciones_dag.procesar_bronze manual__2025-11-13T20:25:47+00:00 [running]> on host b9eedff8ec6c
+[2025-11-13T20:26:13.369+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='german' AIRFLOW_CTX_DAG_ID='etl_donaciones_dag' AIRFLOW_CTX_TASK_ID='procesar_bronze' AIRFLOW_CTX_EXECUTION_DATE='2025-11-13T20:25:47+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-13T20:25:47+00:00'
+[2025-11-13T20:26:13.372+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-13T20:26:13.409+0000] {logging_mixin.py:188} INFO - ✓ Archivo encontrado en: /opt/***/layer/raw/datos_donantes_sinteticos.csv
+[2025-11-13T20:26:14.433+0000] {logging_mixin.py:188} INFO - ✓ Archivo leído correctamente. Registros cargados: 153136
+[2025-11-13T20:26:14.967+0000] {logging_mixin.py:188} INFO - ✓ Datos guardados en formato Parquet en: /opt/***/layer/bronze/donantes_bronze.parquet
+[2025-11-13T20:26:14.974+0000] {logging_mixin.py:188} INFO - ✓ Archivo indicador creado: /opt/***/layer/bronze/donantes_bronze.py
+[2025-11-13T20:26:14.979+0000] {logging_mixin.py:188} INFO - --- PROCESO BRONZE FINALIZADO ---
+[2025-11-13T20:26:14.981+0000] {logging_mixin.py:188} INFO - Registros cargados: 153136
+[2025-11-13T20:26:14.983+0000] {logging_mixin.py:188} INFO - Columnas: ['Id_donante', 'Método_Pago', 'Estrategia', 'Fecha_Creacion', 'Fecha_Pago', 'Monto_Donacion', 'Status_Socio', 'Fecha_Fuga', 'Año_Mes_Creacion', 'Año_Mes_Donacion', 'Año_Mes_Fuga']
+[2025-11-13T20:26:14.983+0000] {python.py:237} INFO - Done. Returned value was:        Id_donante       Método_Pago  ... Año_Mes_Donacion Año_Mes_Fuga
+0         D000031      Cuenta Vista  ...          2024-01          NaT
+1         D000036      Cuenta Vista  ...          2024-01          NaT
+2         D000066  Cuenta Corriente  ...          2024-01      2024-03
+3         D000068        Cuenta Rut  ...          2024-01          NaT
+4         D000202        Cuenta Rut  ...          2024-01      2024-01
+...           ...               ...  ...              ...          ...
+153131    D017911        Cuenta Rut  ...          2025-06          NaT
+153132    D017928        Cuenta Rut  ...          2025-06          NaT
+153133    D017931        Cuenta Rut  ...          2025-06          NaT
+153134    D017980  Cuenta Corriente  ...          2025-06          NaT
+153135    D017999      Cuenta Vista  ...          2025-06          NaT
+
+[153136 rows x 11 columns]
+[2025-11-13T20:26:15.057+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-13T20:26:16.985+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_donaciones_dag, task_id=procesar_bronze, run_id=manual__2025-11-13T20:25:47+00:00, execution_date=20251113T202547, start_date=20251113T202612, end_date=20251113T202616
+[2025-11-13T20:26:17.068+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-11-13T20:26:17.125+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-13T20:26:17.129+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

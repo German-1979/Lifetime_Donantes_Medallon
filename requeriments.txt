@@ -1,0 +1,25 @@
+# ============================================
+# REQUIREMENTS PARA AIRFLOW 2.9.3 + PYTHON 3.11
+# ============================================
+# IMPORTANTE: pandas y numpy ya vienen con Airflow
+# Solo especificamos versiones para librerías adicionales
+
+# Data Generation
+Faker
+
+# Visualization & Dashboard
+streamlit
+plotly
+matplotlib
+seaborn
+
+# Database
+psycopg2-binary
+
+# Utilities
+python-dotenv
+
+# Optional: si usas otras librerías, agrégalas aquí
+# openpyxl  # Para leer archivos Excel
+# requests  # Para APIs HTTP
+# scikit-learn  # Para ML

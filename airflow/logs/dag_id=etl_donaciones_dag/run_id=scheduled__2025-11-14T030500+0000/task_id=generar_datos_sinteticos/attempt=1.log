@@ -1,0 +1,217 @@
+[2025-11-14T03:08:04.932+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-14T03:08:05.006+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_donaciones_dag.generar_datos_sinteticos scheduled__2025-11-14T03:05:00+00:00 [queued]>
+[2025-11-14T03:08:05.019+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_donaciones_dag.generar_datos_sinteticos scheduled__2025-11-14T03:05:00+00:00 [queued]>
+[2025-11-14T03:08:05.023+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-14T03:08:05.044+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): generar_datos_sinteticos> on 2025-11-14 03:05:00+00:00
+[2025-11-14T03:08:05.067+0000] {standard_task_runner.py:64} INFO - Started process 2803 to run task
+[2025-11-14T03:08:05.074+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_donaciones_dag', 'generar_datos_sinteticos', 'scheduled__2025-11-14T03:05:00+00:00', '--job-id', '139', '--raw', '--subdir', 'DAGS_FOLDER/etl_donaciones_dag.py', '--cfg-path', '/tmp/tmp6487b3rp']
+[2025-11-14T03:08:05.087+0000] {standard_task_runner.py:91} INFO - Job 139: Subtask generar_datos_sinteticos
+[2025-11-14T03:08:05.218+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_donaciones_dag.generar_datos_sinteticos scheduled__2025-11-14T03:05:00+00:00 [running]> on host 130331ed4780
+[2025-11-14T03:08:05.395+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='german' AIRFLOW_CTX_DAG_ID='etl_donaciones_dag' AIRFLOW_CTX_TASK_ID='generar_datos_sinteticos' AIRFLOW_CTX_EXECUTION_DATE='2025-11-14T03:05:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-14T03:05:00+00:00'
+[2025-11-14T03:08:05.398+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-14T03:08:05.435+0000] {logging_mixin.py:188} INFO - Efectividad promedio ponderada: 78.24%
+[2025-11-14T03:08:05.437+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-06...
+[2025-11-14T03:08:05.566+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 980
+[2025-11-14T03:08:05.566+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 20
+[2025-11-14T03:08:05.567+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 20
+[2025-11-14T03:08:05.568+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-07...
+[2025-11-14T03:08:05.689+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 1941
+[2025-11-14T03:08:05.690+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 39
+[2025-11-14T03:08:05.690+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 59
+[2025-11-14T03:08:05.691+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-08...
+[2025-11-14T03:08:05.808+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 2883
+[2025-11-14T03:08:05.809+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 58
+[2025-11-14T03:08:05.810+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 117
+[2025-11-14T03:08:05.810+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-09...
+[2025-11-14T03:08:05.960+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 3806
+[2025-11-14T03:08:05.960+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 77
+[2025-11-14T03:08:05.961+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 194
+[2025-11-14T03:08:05.961+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-10...
+[2025-11-14T03:08:06.121+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 4710
+[2025-11-14T03:08:06.122+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 96
+[2025-11-14T03:08:06.123+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 290
+[2025-11-14T03:08:06.123+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-11...
+[2025-11-14T03:08:06.345+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 5596
+[2025-11-14T03:08:06.346+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 114
+[2025-11-14T03:08:06.347+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 404
+[2025-11-14T03:08:06.348+0000] {logging_mixin.py:188} INFO - 
+Procesando 2023-12...
+[2025-11-14T03:08:06.775+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 6465
+[2025-11-14T03:08:06.776+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 131
+[2025-11-14T03:08:06.777+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 535
+[2025-11-14T03:08:06.777+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-01...
+[2025-11-14T03:08:07.066+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 7316
+[2025-11-14T03:08:07.067+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 149
+[2025-11-14T03:08:07.073+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 684
+[2025-11-14T03:08:07.074+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-02...
+[2025-11-14T03:08:07.360+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 8150
+[2025-11-14T03:08:07.361+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 166
+[2025-11-14T03:08:07.362+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 850
+[2025-11-14T03:08:07.363+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-03...
+[2025-11-14T03:08:07.766+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 8967
+[2025-11-14T03:08:07.768+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 183
+[2025-11-14T03:08:07.772+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 1033
+[2025-11-14T03:08:07.773+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-04...
+[2025-11-14T03:08:08.091+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 9768
+[2025-11-14T03:08:08.092+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 199
+[2025-11-14T03:08:08.093+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 1232
+[2025-11-14T03:08:08.094+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-05...
+[2025-11-14T03:08:08.476+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 10553
+[2025-11-14T03:08:08.477+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 215
+[2025-11-14T03:08:08.477+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 1447
+[2025-11-14T03:08:08.478+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-06...
+[2025-11-14T03:08:08.779+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 11322
+[2025-11-14T03:08:08.780+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 231
+[2025-11-14T03:08:08.781+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 1678
+[2025-11-14T03:08:08.781+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-07...
+[2025-11-14T03:08:09.115+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 12076
+[2025-11-14T03:08:09.116+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 246
+[2025-11-14T03:08:09.116+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 1924
+[2025-11-14T03:08:09.117+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-08...
+[2025-11-14T03:08:09.495+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 12815
+[2025-11-14T03:08:09.497+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 261
+[2025-11-14T03:08:09.497+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 2185
+[2025-11-14T03:08:09.498+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-09...
+[2025-11-14T03:08:09.825+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 13539
+[2025-11-14T03:08:09.826+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 276
+[2025-11-14T03:08:09.827+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 2461
+[2025-11-14T03:08:09.829+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-10...
+[2025-11-14T03:08:10.216+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 14249
+[2025-11-14T03:08:10.217+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 290
+[2025-11-14T03:08:10.218+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 2751
+[2025-11-14T03:08:10.218+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-11...
+[2025-11-14T03:08:10.600+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 14945
+[2025-11-14T03:08:10.600+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 304
+[2025-11-14T03:08:10.601+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 3055
+[2025-11-14T03:08:10.601+0000] {logging_mixin.py:188} INFO - 
+Procesando 2024-12...
+[2025-11-14T03:08:10.881+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 15627
+[2025-11-14T03:08:10.882+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 318
+[2025-11-14T03:08:10.883+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 3373
+[2025-11-14T03:08:10.883+0000] {logging_mixin.py:188} INFO - 
+Procesando 2025-01...
+[2025-11-14T03:08:11.242+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 16295
+[2025-11-14T03:08:11.243+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 332
+[2025-11-14T03:08:11.243+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 3705
+[2025-11-14T03:08:11.244+0000] {logging_mixin.py:188} INFO - 
+Procesando 2025-02...
+[2025-11-14T03:08:11.734+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 16950
+[2025-11-14T03:08:11.735+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 345
+[2025-11-14T03:08:11.736+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 4050
+[2025-11-14T03:08:11.736+0000] {logging_mixin.py:188} INFO - 
+Procesando 2025-03...
+[2025-11-14T03:08:12.097+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 17591
+[2025-11-14T03:08:12.098+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 359
+[2025-11-14T03:08:12.099+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 4409
+[2025-11-14T03:08:12.099+0000] {logging_mixin.py:188} INFO - 
+Procesando 2025-04...
+[2025-11-14T03:08:12.538+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 18220
+[2025-11-14T03:08:12.539+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 371
+[2025-11-14T03:08:12.539+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 4780
+[2025-11-14T03:08:12.540+0000] {logging_mixin.py:188} INFO - 
+Procesando 2025-05...
+[2025-11-14T03:08:12.959+0000] {logging_mixin.py:188} INFO -   Activos al final del mes: 18836
+[2025-11-14T03:08:12.960+0000] {logging_mixin.py:188} INFO -   Fugados en este mes: 384
+[2025-11-14T03:08:12.960+0000] {logging_mixin.py:188} INFO -   Total fugados acumulados: 5164
+[2025-11-14T03:08:14.366+0000] {logging_mixin.py:188} INFO - 
+======================================================================
+[2025-11-14T03:08:14.367+0000] {logging_mixin.py:188} INFO - RESUMEN DE DATOS GENERADOS
+[2025-11-14T03:08:14.367+0000] {logging_mixin.py:188} INFO - ======================================================================
+[2025-11-14T03:08:14.368+0000] {logging_mixin.py:188} INFO - Total de registros: 258,764
+[2025-11-14T03:08:14.403+0000] {logging_mixin.py:188} INFO - Socios únicos totales: 24,000
+[2025-11-14T03:08:14.404+0000] {logging_mixin.py:188} INFO - Socios activos al final: 18,836
+[2025-11-14T03:08:14.405+0000] {logging_mixin.py:188} INFO - Socios fugados totales: 5,164
+[2025-11-14T03:08:14.405+0000] {logging_mixin.py:188} INFO - 
+Distribución por Método de Pago:
+[2025-11-14T03:08:14.434+0000] {logging_mixin.py:188} INFO - Cuenta Rut          14496
+Cuenta Vista         4273
+Cuenta Corriente     2891
+Tarjeta Crédito      2340
+Name: count, dtype: int64
+[2025-11-14T03:08:14.436+0000] {logging_mixin.py:188} INFO - 
+Porcentajes:
+[2025-11-14T03:08:14.457+0000] {logging_mixin.py:188} INFO - Cuenta Rut          60.40
+Cuenta Vista        17.80
+Cuenta Corriente    12.05
+Tarjeta Crédito      9.75
+Name: count, dtype: float64
+[2025-11-14T03:08:14.458+0000] {logging_mixin.py:188} INFO - 
+Distribución por Estrategia:
+[2025-11-14T03:08:14.475+0000] {logging_mixin.py:188} INFO - Face to Face     19193
+Telemarketing     4807
+Name: count, dtype: int64
+[2025-11-14T03:08:14.476+0000] {logging_mixin.py:188} INFO - 
+Porcentajes:
+[2025-11-14T03:08:14.479+0000] {logging_mixin.py:188} INFO - Face to Face     79.97
+Telemarketing    20.03
+Name: count, dtype: float64
+[2025-11-14T03:08:14.526+0000] {logging_mixin.py:188} INFO - 
+Análisis de Fugados:
+[2025-11-14T03:08:14.527+0000] {logging_mixin.py:188} INFO - Fugados que NUNCA donaron: 5164 (100.0%)
+[2025-11-14T03:08:14.528+0000] {logging_mixin.py:188} INFO - Fugados que SÍ donaron: 0 (0.0%)
+[2025-11-14T03:08:14.529+0000] {logging_mixin.py:188} INFO - 
+======================================================================
+[2025-11-14T03:08:14.530+0000] {logging_mixin.py:188} INFO - RESUMEN POR MES
+[2025-11-14T03:08:14.530+0000] {logging_mixin.py:188} INFO - ======================================================================
+[2025-11-14T03:08:14.832+0000] {logging_mixin.py:188} INFO -                   Total_Donaciones  ...  Tasa_Exito_%
+Año_Mes_Donacion                    ...              
+2023-06                  8113000.0  ...         77.40
+2023-07                 15877000.0  ...         77.07
+2023-08                 22843000.0  ...         75.79
+2023-09                 30346000.0  ...         76.20
+2023-10                 37297000.0  ...         75.36
+2023-11                 44653000.0  ...         75.90
+2023-12                 51488000.0  ...         76.59
+2024-01                 58333000.0  ...         76.54
+2024-02                 65224000.0  ...         76.97
+2024-03                 70689000.0  ...         75.65
+2024-04                 77982000.0  ...         76.45
+2024-05                 84587000.0  ...         76.58
+2024-06                 90410000.0  ...         76.40
+2024-07                 96728000.0  ...         76.50
+2024-08                102915000.0  ...         76.57
+2024-09                108714000.0  ...         76.58
+2024-10                115140000.0  ...         77.05
+2024-11                119082000.0  ...         76.01
+2024-12                124919000.0  ...         76.32
+2025-01                131176000.0  ...         76.75
+2025-02                135912000.0  ...         76.50
+2025-03                141598000.0  ...         76.95
+2025-04                145729000.0  ...         76.39
+2025-05                150954000.0  ...         76.44
+
+[24 rows x 6 columns]
+[2025-11-14T03:08:14.833+0000] {logging_mixin.py:188} INFO - 
+======================================================================
+[2025-11-14T03:08:14.834+0000] {logging_mixin.py:188} INFO - VERIFICACIÓN: ENERO 2024
+[2025-11-14T03:08:14.834+0000] {logging_mixin.py:188} INFO - ======================================================================
+[2025-11-14T03:08:14.872+0000] {logging_mixin.py:188} INFO - Donantes únicos: 7465
+[2025-11-14T03:08:14.874+0000] {logging_mixin.py:188} INFO - Donaciones exitosas: 5714
+[2025-11-14T03:08:14.875+0000] {logging_mixin.py:188} INFO - Cobros fallidos: 1740
+[2025-11-14T03:08:14.878+0000] {logging_mixin.py:188} INFO - Fugados sin donación (monto=NaN): 11
+[2025-11-14T03:08:14.882+0000] {logging_mixin.py:188} INFO - Tasa de éxito: 76.54%
+[2025-11-14T03:08:18.149+0000] {logging_mixin.py:188} INFO - 
+Archivo guardado correctamente en: /opt/***/scripts/../layer/raw/datos_donantes_sinteticos.csv
+[2025-11-14T03:08:18.240+0000] {python.py:237} INFO - Done. Returned value was: /opt/***/scripts/../layer/raw/datos_donantes_sinteticos.csv
+[2025-11-14T03:08:18.241+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-14T03:08:18.277+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_donaciones_dag, task_id=generar_datos_sinteticos, run_id=scheduled__2025-11-14T03:05:00+00:00, execution_date=20251114T030500, start_date=20251114T030805, end_date=20251114T030818
+[2025-11-14T03:08:18.351+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-11-14T03:08:18.389+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-14T03:08:18.393+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

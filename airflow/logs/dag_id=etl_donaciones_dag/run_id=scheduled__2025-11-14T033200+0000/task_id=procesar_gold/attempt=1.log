@@ -1,0 +1,29 @@
+[2025-11-14T03:35:25.382+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-14T03:35:25.428+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-14T03:32:00+00:00 [queued]>
+[2025-11-14T03:35:25.442+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-14T03:32:00+00:00 [queued]>
+[2025-11-14T03:35:25.443+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-14T03:35:25.476+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): procesar_gold> on 2025-11-14 03:32:00+00:00
+[2025-11-14T03:35:25.490+0000] {standard_task_runner.py:64} INFO - Started process 3963 to run task
+[2025-11-14T03:35:25.495+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_donaciones_dag', 'procesar_gold', 'scheduled__2025-11-14T03:32:00+00:00', '--job-id', '178', '--raw', '--subdir', 'DAGS_FOLDER/etl_donaciones_dag.py', '--cfg-path', '/tmp/tmpu97s7a4c']
+[2025-11-14T03:35:25.500+0000] {standard_task_runner.py:91} INFO - Job 178: Subtask procesar_gold
+[2025-11-14T03:35:25.612+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-14T03:32:00+00:00 [running]> on host 130331ed4780
+[2025-11-14T03:35:25.821+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='german' AIRFLOW_CTX_DAG_ID='etl_donaciones_dag' AIRFLOW_CTX_TASK_ID='procesar_gold' AIRFLOW_CTX_EXECUTION_DATE='2025-11-14T03:32:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-14T03:32:00+00:00'
+[2025-11-14T03:35:25.825+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-14T03:35:25.865+0000] {logging_mixin.py:188} INFO - ✓ Archivo encontrado en Silver: /opt/***/scripts/../layer/silver/donantes_silver.parquet
+[2025-11-14T03:35:25.977+0000] {logging_mixin.py:188} INFO - ✓ Archivo leído correctamente. Registros cargados: 24000
+[2025-11-14T03:35:37.716+0000] {logging_mixin.py:188} INFO - ✓ Datos Gold guardados en: /opt/***/scripts/../layer/gold
+[2025-11-14T03:35:37.723+0000] {logging_mixin.py:188} INFO - ✓ Archivo indicador creado: /opt/***/scripts/../layer/gold/donantes_gold.py
+[2025-11-14T03:35:37.723+0000] {logging_mixin.py:188} INFO - ✅ Proceso Gold finalizado correctamente.
+[2025-11-14T03:35:37.724+0000] {logging_mixin.py:188} INFO - 📊 Resumen de resultados guardados:
+[2025-11-14T03:35:37.725+0000] {logging_mixin.py:188} INFO -    - Total meses procesados: 24
+[2025-11-14T03:35:37.725+0000] {logging_mixin.py:188} INFO -    - Monto total acumulado: $2,030,709,000
+[2025-11-14T03:35:37.726+0000] {logging_mixin.py:188} INFO -    - Total transacciones: 197904
+[2025-11-14T03:35:37.726+0000] {logging_mixin.py:188} INFO -    - Archivos generados:
+[2025-11-14T03:35:37.726+0000] {logging_mixin.py:188} INFO -      • /opt/***/scripts/../layer/gold/suma_montos_gold.parquet
+[2025-11-14T03:35:37.727+0000] {logging_mixin.py:188} INFO -      • /opt/***/scripts/../layer/gold/cantidad_personas_gold.parquet
+[2025-11-14T03:35:37.746+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-11-14T03:35:37.747+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-14T03:35:37.763+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_donaciones_dag, task_id=procesar_gold, run_id=scheduled__2025-11-14T03:32:00+00:00, execution_date=20251114T033200, start_date=20251114T033525, end_date=20251114T033537
+[2025-11-14T03:35:37.820+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-11-14T03:35:37.840+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-14T03:35:37.845+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

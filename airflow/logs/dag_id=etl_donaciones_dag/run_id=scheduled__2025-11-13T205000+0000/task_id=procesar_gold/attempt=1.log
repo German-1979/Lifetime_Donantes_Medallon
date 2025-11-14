@@ -1,0 +1,48 @@
+[2025-11-13T21:00:24.213+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-13T21:00:24.265+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-13T20:50:00+00:00 [queued]>
+[2025-11-13T21:00:24.278+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-13T20:50:00+00:00 [queued]>
+[2025-11-13T21:00:24.279+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-11-13T21:00:24.298+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): procesar_gold> on 2025-11-13 20:50:00+00:00
+[2025-11-13T21:00:24.314+0000] {standard_task_runner.py:64} INFO - Started process 1542 to run task
+[2025-11-13T21:00:24.317+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_donaciones_dag', 'procesar_gold', 'scheduled__2025-11-13T20:50:00+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/etl_donaciones_dag.py', '--cfg-path', '/tmp/tmpk769ucfu']
+[2025-11-13T21:00:24.320+0000] {standard_task_runner.py:91} INFO - Job 44: Subtask procesar_gold
+[2025-11-13T21:00:24.412+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_donaciones_dag.procesar_gold scheduled__2025-11-13T20:50:00+00:00 [running]> on host b9eedff8ec6c
+[2025-11-13T21:00:24.533+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='german' AIRFLOW_CTX_DAG_ID='etl_donaciones_dag' AIRFLOW_CTX_TASK_ID='procesar_gold' AIRFLOW_CTX_EXECUTION_DATE='2025-11-13T20:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-13T20:50:00+00:00'
+[2025-11-13T21:00:24.535+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-13T21:00:24.553+0000] {logging_mixin.py:188} INFO - ✓ Archivo encontrado en Silver: /opt/***/scripts/../layer/silver/donantes_silver.parquet
+[2025-11-13T21:00:24.657+0000] {logging_mixin.py:188} INFO - ✓ Archivo leído correctamente. Registros cargados: 18000
+[2025-11-13T21:00:24.662+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-13T21:00:24.663+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/gold_layer.py", line 29, in procesar_a_gold
+    suma_montos = df_silver.groupby('Mes')['Monto'].sum()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/frame.py", line 8869, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/groupby/groupby.py", line 1278, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/groupby/grouper.py", line 1009, in get_grouper
+    raise KeyError(gpr)
+KeyError: 'Mes'
+[2025-11-13T21:00:24.699+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=etl_donaciones_dag, task_id=procesar_gold, run_id=scheduled__2025-11-13T20:50:00+00:00, execution_date=20251113T205000, start_date=20251113T210024, end_date=20251113T210024
+[2025-11-13T21:00:24.720+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 44 for task procesar_gold ('Mes'; 1542)
+[2025-11-13T21:00:24.773+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-11-13T21:00:24.803+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-13T21:00:24.806+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
