@@ -4,14 +4,9 @@ from datetime import datetime, timezone
 
 def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     """
-    Procesa los datos desde la capa Bronze hacia la capa Silver.
-    - Lee el archivo Parquet desde /bronze.
-    - Valida existencia del archivo.
-    - Crea la carpeta /silver si no existe.
-    - Muestra muestra de datos y tipos.
-    - Guarda el resultado como donantes_silver.parquet.
-    - Crea un archivo indicador donantes_silver.py.
-    - Retorna el DataFrame procesado.
+    Procesa los datos desde Bronze hacia Silver con pivot mensual.
+    Calcula totales acumulados y transacciones efectivas (>0).
+    Retorna el DataFrame pivot y un resumen mensual consistente.
     """
 
     # -------------------------------
@@ -20,14 +15,12 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     carpeta_bronze = os.path.join(base_dir, "..", "layer", "bronze")
     carpeta_silver = os.path.join(base_dir, "..", "layer", "silver")
-    nombre_archivo = nombre_archivo
     ruta_bronze = os.path.join(carpeta_bronze, nombre_archivo)
 
-    # Crear carpeta silver si no existe
     os.makedirs(carpeta_silver, exist_ok=True)
 
     # -------------------------------
-    # 1. VALIDAR EXISTENCIA DEL ARCHIVO EN BRONZE
+    # 1. VALIDAR EXISTENCIA DEL ARCHIVO
     # -------------------------------
     if not os.path.exists(ruta_bronze):
         raise FileNotFoundError(f"No se encontró el archivo en Bronze: {ruta_bronze}")
@@ -36,72 +29,75 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     # -------------------------------
     # 2. LECTURA DEL ARCHIVO PARQUET
     # -------------------------------
-    try:
-        df_silver = pd.read_parquet(ruta_bronze)
-        print(f"✓ Archivo leído correctamente. Registros cargados: {len(df_silver)}")
-    except Exception as e:
-        raise Exception(f"Error al leer el archivo Parquet: {e}")
+    df_silver = pd.read_parquet(ruta_bronze)
+    print(f"✓ Archivo leído correctamente. Registros cargados: {len(df_silver)}")
 
     # -------------------------------
-    # 3. MOSTRAR MUESTRA Y TIPOS DE DATOS
-    # -------------------------------
-    print("\n--- Primeros 10 registros ---")
-    print(df_silver.head(10))
-
-    print("\n--- Tipos de datos por columna ---")
-    print(df_silver.dtypes)
-
-    # -------------------------------
-    # 4. TRANSFORMACIONES 
+    # 3. TRANSFORMACIÓN PIVOT
     # -------------------------------
     df_pivot_silver = df_silver.pivot_table(
-    index = ['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion'], columns='Año_Mes_Donacion', 
-        values='Monto_Donacion', aggfunc='sum', fill_value=0).reset_index()
+        index=['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion'],
+        columns='Año_Mes_Donacion',
+        values='Monto_Donacion',
+        aggfunc='sum',
+        fill_value=0
+    ).reset_index()
 
-    # Quitar nombre de las columnas para que sean planas
+    # Quitar nombre de columnas jerárquicas
     df_pivot_silver.columns.name = None
-
-    # Ordenar por Id_donante
     df_pivot_silver = df_pivot_silver.sort_values(by='Id_donante').reset_index(drop=True)
 
-    print("\n--- Primeros 10 registros de los datos pivoteados ---")
+    # -------------------------------
+    # 3b. PRINT DE INSPECCIÓN
+    # -------------------------------
+    print("\n--- Primeros 10 registros de df_pivot_silver ---")
     print(df_pivot_silver.head(10))
+    print("\n--- Columnas y tipos ---")
+    print(df_pivot_silver.dtypes)
 
     # -------------------------------
-    # 5. GUARDAR PARQUET EN SILVER
+    # 4. GUARDAR PARQUET EN SILVER
     # -------------------------------
     ruta_salida = os.path.join(carpeta_silver, "donantes_silver.parquet")
-    try:
-        df_pivot_silver.to_parquet(ruta_salida, index=False)
-        print(f"\n✓ Datos procesados y guardados en: {ruta_salida}")
-    except Exception as e:
-        raise Exception(f"Error al guardar archivo en Silver: {e}")
+    df_pivot_silver.to_parquet(ruta_salida, index=False)
+    print(f"\n✓ Datos procesados y guardados en: {ruta_salida}")
 
     # -------------------------------
-    # 6. CREAR ARCHIVO INDICADOR .py EN SILVER
+    # 5. ARCHIVO INDICADOR
     # -------------------------------
-
-    # datetime con zona horaria UTC, sin usar utcnow()
-    ahora_utc = datetime.now(timezone.utc)
     indicador_py = os.path.join(carpeta_silver, "donantes_silver.py")
-    try:
-        with open(indicador_py, "w", encoding="utf-8") as f:
-            f.write("# Archivo indicador para la capa Silver\n")
-            f.write(f"# Generado: {ahora_utc.isoformat()}\n")
-            f.write("# Contiene: donantes_silver.parquet (datos limpios y listos para análisis)\n")
-        print(f"✓ Archivo indicador creado: {indicador_py}")
-    except Exception as e:
-        raise Exception(f"Error al crear el archivo indicador en Silver: {e}")
+    ahora_utc = datetime.now(timezone.utc)
+    with open(indicador_py, "w", encoding="utf-8") as f:
+        f.write("# Archivo indicador para la capa Silver\n")
+        f.write(f"# Generado: {ahora_utc.isoformat()}\n")
+        f.write("# Contiene: donantes_silver.parquet (datos limpios y pivot mensuales)\n")
+    print(f"✓ Archivo indicador creado: {indicador_py}")
 
     # -------------------------------
-    # 7. LOG FINAL
+    # 6. RESUMEN MENSUAL
     # -------------------------------
-    print("\n--- PROCESO SILVER FINALIZADO ---")
-    print(f"Registros finales: {len(df_pivot_silver)}")
-    print(f"Columnas: {list(df_pivot_silver.columns)}")
+    meses = [c for c in df_pivot_silver.columns if c not in ['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion']]
+    resumen_mensual = pd.DataFrame(index=meses)
+    resumen_mensual['Total_Donaciones'] = df_pivot_silver[meses].sum()
+    resumen_mensual['Cantidad_Donaciones_Exitosas'] = (df_pivot_silver[meses] > 0).sum()
+    resumen_mensual['Tasa_Exito_%'] = 100  # Silver no tiene info de fallos de cobro, solo pivot positivo
 
-    return df_pivot_silver
+    print("\n--- RESUMEN MENSUAL EN SILVER ---")
+    print(resumen_mensual)
 
-# Permite ejecución directa del script
+    # -------------------------------
+    # 7. TOTALES ACUMULADOS
+    # -------------------------------
+    total_donaciones = resumen_mensual['Total_Donaciones'].sum()
+    total_registros = len(df_silver)
+    total_transacciones = resumen_mensual['Cantidad_Donaciones_Exitosas'].sum()
+
+    print("\n--- TOTALES ACUMULADOS EN SILVER ---")
+    print(f"Suma total Monto_Donacion: {total_donaciones}")
+    print(f"\nCantidad total de registros generados: {total_registros}")
+    print(f"Total transacciones (>0): {total_transacciones}")
+
+    return df_pivot_silver, resumen_mensual
+
 if __name__ == "__main__":
     procesar_a_silver()

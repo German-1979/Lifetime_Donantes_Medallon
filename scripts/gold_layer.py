@@ -1,14 +1,14 @@
 import os
 import pandas as pd
 from datetime import datetime, timezone
+import dataframe_image as dfi
 
 def procesar_a_gold(nombre_archivo="donantes_silver.parquet"):
     """
     Procesa los datos desde la capa Silver hacia la capa Gold.
-    - Carga el archivo Parquet desde /silver.
     - Calcula montos y cantidad de transacciones por mes relativo.
-    - Guarda resultados en /gold y crea archivo indicador.
-    - NO retorna nada (compatible con Airflow).
+    - Genera resúmenes estilo 'show()'.
+    - Guarda resultados en /gold y archivos PNG de resumen.
     """
     # -------------------------------
     # CONFIGURACIÓN
@@ -16,32 +16,29 @@ def procesar_a_gold(nombre_archivo="donantes_silver.parquet"):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     carpeta_silver = os.path.join(base_dir, "..", "layer", "silver")
     carpeta_gold = os.path.join(base_dir, "..", "layer", "gold")
-    nombre_archivo = nombre_archivo
     ruta_silver = os.path.join(carpeta_silver, nombre_archivo)
-
     os.makedirs(carpeta_gold, exist_ok=True)
 
     # -------------------------------
-    # 1. VALIDAR EXISTENCIA DEL ARCHIVO EN SILVER
+    # VALIDAR ARCHIVO
     # -------------------------------
     if not os.path.exists(ruta_silver):
         raise FileNotFoundError(f"No se encontró el archivo en Silver: {ruta_silver}")
     print(f"✓ Archivo encontrado en Silver: {ruta_silver}")
 
-    # -------------------------------
-    # 2. CARGAR ARCHIVO PARQUET
-    # -------------------------------
     df_pivot = pd.read_parquet(ruta_silver)
     print(f"✓ Archivo leído correctamente. Registros cargados: {len(df_pivot)}")
 
     # -------------------------------
-    # 3. PROCESAMIENTO GOLD
+    # MESES Y POSICIÓN DE INICIO
     # -------------------------------
     months = sorted([col for col in df_pivot.columns if isinstance(col, str) and col[:4].isdigit() and '-' in col])
     entry_idx = df_pivot['Año_Mes_Creacion'].apply(lambda x: months.index(x))
 
+    # -------------------------------
+    # DATOS RELATIVOS
+    # -------------------------------
     relative_data, presence_data = [], []
-
     for idx, row in df_pivot.iterrows():
         start = entry_idx[idx]
         rel = row[months[start:]].tolist()
@@ -56,55 +53,66 @@ def procesar_a_gold(nombre_archivo="donantes_silver.parquet"):
     df_relative = pd.DataFrame(relative_data_padded)
     df_presence = pd.DataFrame(presence_data_padded)
 
-    suma_montos = df_relative.sum(axis=0)
-    cantidad_personas = df_presence.sum(axis=0)
-
     cols = [f"Mes {i+1}" for i in range(max_months)]
-    suma_montos.index = cols
-    cantidad_personas.index = cols
+    df_relative.columns = cols
+    df_presence.columns = cols
+
+    # Agregar Periodo para mostrar como en PySpark
+    df_relative_t = df_relative.sum().reset_index()
+    df_relative_t.columns = ["Periodo", "Total_Monto"]
+
+    df_presence_t = df_presence.sum().reset_index()
+    df_presence_t.columns = ["Periodo", "Cantidad_Transacciones"]
 
     # -------------------------------
-    # 4. GUARDAR RESULTADOS EN GOLD
+    # LOG ESTILO SHOW()
+    # -------------------------------
+    print("\n--- Resumen Gold Montos ---")
+    print(df_relative_t.to_string(index=False))
+    print(f"Total donaciones acumuladas: {df_relative_t['Total_Monto'].sum():,.0f}")
+
+    print("\n--- Resumen Gold Transacciones (>0) ---")
+    print(df_presence_t.to_string(index=False))
+    print(f"Total transacciones acumuladas: {df_presence_t['Cantidad_Transacciones'].sum():,.0f}")
+
+    # -------------------------------
+    # GUARDAR PARQUET
     # -------------------------------
     ruta_salida_montos = os.path.join(carpeta_gold, "suma_montos_gold.parquet")
-    ruta_salida_personas = os.path.join(carpeta_gold, "cantidad_personas_gold.parquet")
-
-    suma_montos.to_frame(name="Total_Monto").to_parquet(ruta_salida_montos)
-    cantidad_personas.to_frame(name="Cantidad_Transacciones").to_parquet(ruta_salida_personas)
-
-    print(f"✓ Datos Gold guardados en: {carpeta_gold}")
+    ruta_salida_trans = os.path.join(carpeta_gold, "cantidad_personas_gold.parquet")
+    df_relative_t.to_parquet(ruta_salida_montos, index=False)
+    df_presence_t.to_parquet(ruta_salida_trans, index=False)
 
     # -------------------------------
-    # 5. CREAR ARCHIVO INDICADOR
+    # GUARDAR PNG
+    # -------------------------------
+    ruta_png_montos = os.path.join(carpeta_gold, "suma_montos_gold.png")
+    ruta_png_trans = os.path.join(carpeta_gold, "cantidad_personas_gold.png")
+    dfi.export(df_relative_t, ruta_png_montos, max_cols=-1)
+    dfi.export(df_presence_t, ruta_png_trans, max_cols=-1)
+
+    # -------------------------------
+    # ARCHIVO INDICADOR
     # -------------------------------
     ahora_utc = datetime.now(timezone.utc)
     indicador_py = os.path.join(carpeta_gold, "donantes_gold.py")
     with open(indicador_py, "w", encoding="utf-8") as f:
         f.write("# Archivo indicador para la capa Gold\n")
         f.write(f"# Generado: {ahora_utc.isoformat()}\n")
-        f.write("# Contiene: suma_montos_gold.parquet y cantidad_personas_gold.parquet\n")
-
+        f.write("# Contiene: suma_montos_gold.parquet, cantidad_personas_gold.parquet y PNGs\n")
     print(f"✓ Archivo indicador creado: {indicador_py}")
-    print("✅ Proceso Gold finalizado correctamente.\n")
-    
-    # -------------------------------
-    # 6. LOG DE RESUMEN (en lugar de return)
-    # -------------------------------
-    print(f"📊 Resumen de resultados guardados:")
-    print(f"   - Total meses procesados: {max_months}")
-    print(f"   - Monto total acumulado: ${suma_montos.sum():,.0f}")
-    print(f"   - Total transacciones: {int(cantidad_personas.sum())}")
-    print(f"   - Archivos generados:")
-    print(f"     • {ruta_salida_montos}")
-    print(f"     • {ruta_salida_personas}")
-    
-    # CRÍTICO: NO retornar nada para compatibilidad con Airflow
-    # Los datos están guardados en archivos parquet y pueden ser leídos después
+
+    print("\n✅ Proceso Gold finalizado correctamente.\n")
+    print(f"Archivos generados en {carpeta_gold}:")
+    print(f" - {ruta_salida_montos}")
+    print(f" - {ruta_salida_trans}")
+    print(f" - {ruta_png_montos}")
+    print(f" - {ruta_png_trans}")
 
 
-# ============================================
-# BLOQUE DE EJECUCIÓN LOCAL (para testing)
-# ============================================
+# =======================
+# EJECUCIÓN LOCAL
+# =======================
 if __name__ == "__main__":
     print("🔄 Ejecutando proceso Gold en modo local...")
     procesar_a_gold()
