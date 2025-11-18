@@ -32,7 +32,8 @@ def procesar_a_gold(nombre_archivo="donantes_silver.parquet"):
     # -------------------------------
     # MESES Y POSICIÓN DE INICIO
     # -------------------------------
-    months = sorted([col for col in df_pivot.columns if isinstance(col, str) and col[:4].isdigit() and '-' in col])
+    months = [col for col in df_pivot.columns if isinstance(col, str) and col[:4].isdigit() and '-' in col]
+    months = sorted(months, key=lambda x: pd.Period(x, freq='M'))  # orden cronológico
     entry_idx = df_pivot['Año_Mes_Creacion'].apply(lambda x: months.index(x))
 
     # -------------------------------

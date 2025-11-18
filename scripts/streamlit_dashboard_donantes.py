@@ -59,10 +59,6 @@ def calcular_metricas(df, columnas):
     donaciones = df[columnas].groupby(df['Estrategia'])[columnas].sum()
     return transacciones, donaciones
 
-
-# -------------------------------
-# CALCULAR Y GRAFICAR
-# -------------------------------
 # ------------------------------- 
 # CALCULAR Y GRAFICAR
 # -------------------------------

@@ -33,8 +33,20 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     print(f"✓ Archivo leído correctamente. Registros cargados: {len(df_silver)}")
 
     # -------------------------------
-    # 3. TRANSFORMACIÓN PIVOT
+    # 2b. FILTRAR REGISTROS SIN FECHA DE DONACIÓN
     # -------------------------------
+    registros_originales = len(df_silver)
+    df_silver = df_silver[df_silver['Año_Mes_Donacion'].notna()].copy()
+    registros_filtrados = len(df_silver)
+    
+    if registros_originales != registros_filtrados:
+        print(f"✓ Filtrados {registros_originales - registros_filtrados} registros sin Año_Mes_Donacion (NaT)")
+
+    # ----------------------------------------------------------
+    # 3. TRANSFORMACIÓN - ELIMINAR ID FUGADOS Y DONACION + PIVOT
+    # ----------------------------------------------------------
+    fecha_pago_none = df_silver[df_silver['Fecha_Pago'].isna()]
+    df_silver = df_silver.drop(fecha_pago_none.index)
     df_pivot_silver = df_silver.pivot_table(
         index=['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion'],
         columns='Año_Mes_Donacion',
@@ -45,6 +57,13 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
 
     # Quitar nombre de columnas jerárquicas
     df_pivot_silver.columns.name = None
+    
+    # Eliminar columna NaT si existe en el pivot
+    columnas_nat = [col for col in df_pivot_silver.columns if pd.isna(col)]
+    if columnas_nat:
+        df_pivot_silver = df_pivot_silver.drop(columns=columnas_nat)
+        print(f"✓ Eliminadas {len(columnas_nat)} columnas NaT del pivot")
+    
     df_pivot_silver = df_pivot_silver.sort_values(by='Id_donante').reset_index(drop=True)
 
     # -------------------------------
@@ -77,6 +96,10 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     # 6. RESUMEN MENSUAL
     # -------------------------------
     meses = [c for c in df_pivot_silver.columns if c not in ['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion']]
+    
+    # Filtrar columnas NaT si existen
+    meses = [m for m in meses if pd.notna(m)]
+    
     resumen_mensual = pd.DataFrame(index=meses)
     resumen_mensual['Total_Donaciones'] = df_pivot_silver[meses].sum()
     resumen_mensual['Cantidad_Donaciones_Exitosas'] = (df_pivot_silver[meses] > 0).sum()
@@ -89,7 +112,7 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     # 7. TOTALES ACUMULADOS
     # -------------------------------
     total_donaciones = resumen_mensual['Total_Donaciones'].sum()
-    total_registros = len(df_silver)
+    total_registros = registros_filtrados  # Usar registros después del filtro
     total_transacciones = resumen_mensual['Cantidad_Donaciones_Exitosas'].sum()
 
     print("\n--- TOTALES ACUMULADOS EN SILVER ---")
