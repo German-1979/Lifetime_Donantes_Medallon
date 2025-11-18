@@ -167,6 +167,10 @@ En simple: **entender el ciclo de vida del donante**.
     usuario: airflow
     clave: airflow
 
+Ejemplo de Ejecución del archivo **etl_donaciones_dag.py**:
+
+![Ejemplo de Ejecución Airflow](./airflow/dags/Airflow_Lifetime_Value.png)
+
 ---
 
 ## ▶️ 6. Ejecutar pipeline en modo local
