@@ -1,5 +1,7 @@
 # 🧩 Análisis de Lifetime y Cohortes de Donantes  
-### *Pipeline ETL automatizado con Airflow + análisis avanzado en Streamlit*
+
+
+## Pipeline ETL automatizado con Airflow + análisis avanzado en Streamlit
 
 Este proyecto modela el comportamiento real de los donantes de ONG’s, simulando aportes mensuales, fugas, pagos fallidos y patrones de retención.  
 Incluye un pipeline completo ETL tipo Medallón (*Raw → Bronze → Silver → Gold*), orquestado con **Airflow** y visualizado mediante un **dashboard en Streamlit**.
@@ -30,7 +32,7 @@ Para responderlas, este proyecto:
 
 Proyecto: Lifetime_Donantes_Medallon
 
-![Estructura del Proyecto](./estructura.md)
+![Estructura del Proyecto](./airflow/dags/Estructura_Proyecto.png)
 
 ---
 
@@ -154,79 +156,105 @@ En simple: **entender el ciclo de vida del donante**.
 
 ## 🛠️ 4. Clonar este proyecto
 
-git clone https://github.com/tu_usuario/tu_repo.git
-cd tu_repo
+- git clone https://github.com/tu_usuario/tu_repo.git
+- cd tu_repo
 
 ---
 
 ## 🚀 5. Levantar Airflow con Docker
 
-http://localhost:8080
-usuario: airflow
-clave: airflow
+- http://localhost:8080
+- usuario: airflow
+- clave: airflow
 
 ---
 
 ## ▶️ 6. Ejecutar pipeline en modo local
 
-python main.py
+- python main.py
 
 --- 
 
 Procesa:
 
-    1. Datos Sintéticos
+    1. Datos Sintéticos 
 
-    2. Bronze
+    2. Bronze 
 
-    3. Silver
+    3. Silver 
 
-    4. Gold
+    4. Gold 
 
 ---
 
 ## 📊 7. Ejecutar Dashboard Streamlit
 
-streamlit run scripts/streamlit_dashboard.py
+- streamlit run scripts/streamlit_dashboard.py
 
 ---
 
 El dashboard se abrirá en:
 
-[text](http://localhost:8501)
+- http://localhost:8501
 
 Incluye métricas clave, análisis por cohorte, heatmaps, segmentación y gráficos de evolución.
 
 ---
 
-🧠 Tecnologías usadas
+## 🧠 Tecnologías usadas
 
-    - Python 3.11
-
-    - Pandas / NumPy
-
-    - Streamlit
-
-    - Seaborn / Matplotlib
-
-    - Airflow
-
-    - Docker
-
-    - Arquitectura Medallón (Raw → Bronze → Silver → Gold)
-
-    - Archivos Parquet
+| Herramienta                         | Propósito                                                             |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| **Python**                          | Lenguaje principal para ETL, análisis y automatización               |
+| **Pandas / NumPy**                  | Manipulación de datos y cálculos numéricos                            |
+| **Streamlit**                       | Construcción del dashboard y front-end analítico                      |
+| **Seaborn / Matplotlib**            | Visualización de datos estática y exploratoria                         |
+| **Airflow**                         | Orquestación y programación de flujos ETL                             |
+| **Docker**                          | Contenedorización del proyecto y despliegue reproducible              |
+| **Arquitectura Medallón**           | Diseño del pipeline de datos (Raw → Bronze → Silver → Gold)          |
+| **Archivos Parquet**                | Formato columnar eficiente para almacenamiento y procesamiento        |
 
     ---
 
-📌 Estado del Proyecto
+## 📊 Estructura de Capas Medallón
 
-✔ Pipeline ETL funcionando
-✔ Dashboard Streamlit operativo
-✔ Datos sintéticos realistas
-✔ Airflow schedulado diariamente
+| Capa       | Propósito                              | Formato    |
+| ---------- | -------------------------------------- | ---------- |
+| **Bronze** | Datos crudos sin transformar           | CSV / JSON |
+| **Silver** | Datos limpios, tipificados y validados | Parquet    |
+| **Gold**   | Datos agregados y métricas analíticas  | Parquet    |
 
-Próximos pasos:
+---
+
+## 📌 Estado del Proyecto
+
+✔ Pipeline ETL funcionando 
+✔ Dashboard Streamlit operativo 
+✔ Datos sintéticos realistas 
+✔ Airflow schedulado diariamente 
+
+---
+
+## 📈 Resultado Final
+
+El proyecto entrega una visión completa y accionable del comportamiento de los donantes, permitiendo responder preguntas claves sobre retención, fuga y aportes mensuales.
+Gracias al pipeline ETL automatizado y al dashboard analítico, es posible entender:
+
+    - ¿Cómo evolucionan las cohortes de donantes mes a mes?
+
+    - ¿Qué canales (Face to Face o Telemarketing) retienen mejor y generan más ingresos?
+
+    - ¿Qué métodos de pago presentan más fallas y cómo afectan la recaudación?
+
+    - ¿Cómo se comporta la fuga mensual y el Lifetime Value (LTV) por segmento?
+
+    - ¿Cómo cambia la base de donantes en el tiempo y qué patrones anticipan la cancelación?
+
+El resultado final es una plataforma que combina simulación de datos, procesos ETL robustos y visualización avanzada, permitiendo explorar de forma clara y dinámica el ciclo de vida completo de los donantes.
+
+--
+
+## 🔜 Próximos pasos:
 
     - Modelos predictivos de churn
 
@@ -235,3 +263,10 @@ Próximos pasos:
     - Segmentación avanzada con clustering
 
     - Forecast de ingresos por cohorte
+
+---
+
+### 🧑‍💻 Autor
+
+Germán Domínguez
+Especialista en datos, análisis y transformación digital.
