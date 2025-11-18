@@ -78,8 +78,11 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     # 4. GUARDAR PARQUET EN SILVER
     # -------------------------------
     ruta_salida = os.path.join(carpeta_silver, "donantes_silver.parquet")
-    df_pivot_silver.to_parquet(ruta_salida, index=False)
+    ruta_salida_pivot = os.path.join(carpeta_silver, "donantes_silver_pivot.parquet")
+    df_silver.to_parquet(ruta_salida, index=False)
+    df_pivot_silver.to_parquet(ruta_salida_pivot, index=False)
     print(f"\n✓ Datos procesados y guardados en: {ruta_salida}")
+    print(f"\n✓ Datos procesados y guardados en: {ruta_salida_pivot}")
 
     # -------------------------------
     # 5. ARCHIVO INDICADOR
