@@ -177,7 +177,9 @@ Ejemplo de Ejecución del archivo **etl_donaciones_dag.py**:
 
     python main.py
 
---- 
+Al ejecutar este archivo desde tu terminal, deberás ver que todo se ejecutó correctamente. He aquí un ejemplo de su procesamiento:
+
+![Ejecución Main](./ejecucion_main-py.png)
 
 Procesa:
 
@@ -194,6 +196,14 @@ Procesa:
 ## 📊 7. Ejecutar Dashboard Streamlit
 
     streamlit run scripts/streamlit_dashboard.py
+
+Ejemplos de los gráficos de salida ala ejcutar el archivo:
+
+![Dashboard Heatmaps](./layer/gold/dashboard_heatmaps.png)
+
+![Dashboard Métricas](./layer/gold/dashboard_metricas.png)
+
+![Dashboard Lifetime](./layer/gold/dashboard_lifetime.png)
 
 ---
 
