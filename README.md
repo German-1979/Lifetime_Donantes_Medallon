@@ -174,4 +174,41 @@ En simple: **entender el ciclo de vida del donante**.
 git clone https://github.com/tu_usuario/tu_repo.git
 cd tu_repo
 
+---
 
+## 🚀 5. Levantar Airflow con Docker
+
+```bash
+http://localhost:8080
+usuario: airflow
+clave: airflow
+
+---
+
+## ▶️ 6. Ejecutar pipeline en modo local
+
+```bash
+python main.py
+
+--- 
+
+Procesa:
+
+    1. Datos Sintéticos
+
+    2. Bronze
+
+    3. Silver
+
+    4. Gold
+
+---
+
+## 📊 7. Ejecutar Dashboard Streamlit
+
+```bash
+streamlit run scripts/streamlit_dashboard.py
+
+---
+
+Abrir en:
