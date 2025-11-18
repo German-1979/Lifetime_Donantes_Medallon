@@ -177,13 +177,13 @@ En simple: **entender el ciclo de vida del donante**.
 
 Procesa:
 
-    1. Datos Sintéticos 
+ - 1. Datos Sintéticos 
 
-    2. Bronze 
+ - 2. Bronze 
 
-    3. Silver 
+ - 3. Silver 
 
-    4. Gold 
+ - 4. Gold 
 
 ---
 
@@ -228,10 +228,10 @@ Incluye métricas clave, análisis por cohorte, heatmaps, segmentación y gráfi
 
 ## 📌 Estado del Proyecto
 
-✔ Pipeline ETL funcionando 
-✔ Dashboard Streamlit operativo 
-✔ Datos sintéticos realistas 
-✔ Airflow schedulado diariamente 
+✔ Pipeline ETL funcionando   
+✔ Dashboard Streamlit operativo  
+✔ Datos sintéticos realistas  
+✔ Airflow schedulado diariamente  
 
 ---
 
@@ -240,15 +240,15 @@ Incluye métricas clave, análisis por cohorte, heatmaps, segmentación y gráfi
 El proyecto entrega una visión completa y accionable del comportamiento de los donantes, permitiendo responder preguntas claves sobre retención, fuga y aportes mensuales.
 Gracias al pipeline ETL automatizado y al dashboard analítico, es posible entender:
 
-    - ¿Cómo evolucionan las cohortes de donantes mes a mes?
+ - ¿Cómo evolucionan las cohortes de donantes mes a mes?
 
-    - ¿Qué canales (Face to Face o Telemarketing) retienen mejor y generan más ingresos?
+ - ¿Qué canales (Face to Face o Telemarketing) retienen mejor y generan más ingresos?
 
-    - ¿Qué métodos de pago presentan más fallas y cómo afectan la recaudación?
+ - ¿Qué métodos de pago presentan más fallas y cómo afectan la recaudación?
 
-    - ¿Cómo se comporta la fuga mensual y el Lifetime Value (LTV) por segmento?
+ - ¿Cómo se comporta la fuga mensual y el Lifetime Value (LTV) por segmento?
 
-    - ¿Cómo cambia la base de donantes en el tiempo y qué patrones anticipan la cancelación?
+ - ¿Cómo cambia la base de donantes en el tiempo y qué patrones anticipan la cancelación?
 
 El resultado final es una plataforma que combina simulación de datos, procesos ETL robustos y visualización avanzada, permitiendo explorar de forma clara y dinámica el ciclo de vida completo de los donantes.
 
