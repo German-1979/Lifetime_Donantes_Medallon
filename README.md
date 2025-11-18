@@ -156,46 +156,46 @@ En simple: **entender el ciclo de vida del donante**.
 
 ## 🛠️ 4. Clonar este proyecto
 
-- git clone https://github.com/tu_usuario/tu_repo.git
-- cd tu_repo
+    git clone https://github.com/tu_usuario/tu_repo.git
+    cd tu_repo
 
 ---
 
 ## 🚀 5. Levantar Airflow con Docker
 
-- http://localhost:8080
-- usuario: airflow
-- clave: airflow
+    http://localhost:8080
+    usuario: airflow
+    clave: airflow
 
 ---
 
 ## ▶️ 6. Ejecutar pipeline en modo local
 
-- python main.py
+    python main.py
 
 --- 
 
 Procesa:
 
- - 1. Datos Sintéticos 
+ - Datos Sintéticos 
 
- - 2. Bronze 
+ - Bronze 
 
- - 3. Silver 
+ - Silver 
 
- - 4. Gold 
+ - Gold 
 
 ---
 
 ## 📊 7. Ejecutar Dashboard Streamlit
 
-- streamlit run scripts/streamlit_dashboard.py
+    streamlit run scripts/streamlit_dashboard.py
 
 ---
 
 El dashboard se abrirá en:
 
-- http://localhost:8501
+    http://localhost:8501
 
 Incluye métricas clave, análisis por cohorte, heatmaps, segmentación y gráficos de evolución.
 
@@ -256,13 +256,13 @@ El resultado final es una plataforma que combina simulación de datos, procesos 
 
 ## 🔜 Próximos pasos:
 
-    - Modelos predictivos de churn
+ - Modelos predictivos de churn
 
-    - Survival Analysis
+ - Survival Analysis
 
-    - Segmentación avanzada con clustering
+ - Segmentación avanzada con clustering
 
-    - Forecast de ingresos por cohorte
+ - Forecast de ingresos por cohorte
 
 ---
 
