@@ -30,23 +30,7 @@ Para responderlas, este proyecto:
 
 Proyecto: Lifetime_Donantes_Medallon
 
-├── airflow/ # DAG diario de Airflow
-├── layer/
-│ ├── raw/ # Datos sintéticos
-│ ├── bronze/ # Limpieza
-│ ├── silver/ # Base para cohortes
-│ ├── gold/ # KPIs finales
-├── scripts/
-│ ├── generacion_datos_sinteticos.py
-│ ├── bronze_layer.py
-│ ├── silver_layer.py
-│ ├── gold_layer.py
-│ └── streamlit_dashboard.py
-├── main.py # Ejecuta pipeline local
-├── docker-compose.yaml # Levanta Airflow
-└── Dockerfile
-
-
+![Estructura del Proyecto](./estructura.md)
 
 ---
 
