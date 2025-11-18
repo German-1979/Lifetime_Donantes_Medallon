@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime, timezone
 import dataframe_image as dfi
 
-def procesar_a_gold(nombre_archivo="donantes_silver.parquet"):
+def procesar_a_gold(nombre_archivo="donantes_silver_pivot.parquet"):
     """
     Procesa los datos desde la capa Silver hacia la capa Gold.
     - Calcula montos y cantidad de transacciones por mes relativo.

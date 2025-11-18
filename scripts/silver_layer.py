@@ -47,6 +47,10 @@ def procesar_a_silver(nombre_archivo="donantes_bronze.parquet"):
     # ----------------------------------------------------------
     fecha_pago_none = df_silver[df_silver['Fecha_Pago'].isna()]
     df_silver = df_silver.drop(fecha_pago_none.index)
+
+    df_silver['Fecha_Creacion'] = pd.to_datetime(df_silver['Fecha_Creacion'])
+    df_silver['Fecha_Pago'] = pd.to_datetime(df_silver['Fecha_Pago'])
+
     df_pivot_silver = df_silver.pivot_table(
         index=['Id_donante', 'Método_Pago', 'Estrategia', 'Status_Socio', 'Año_Mes_Creacion'],
         columns='Año_Mes_Donacion',
