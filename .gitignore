@@ -1,0 +1,58 @@
+# --- ENTORNOS Y CONFIG LOCAL ---
+.env
+*.env
+venv/
+.venv/
+env/
+ENV/
+
+# --- ARCHIVOS DE PYTHON ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# --- JUPYTER NOTEBOOK CHECKPOINTS ---
+.ipynb_checkpoints/
+
+# --- CONFIGURACIONES LOCALES DE VSCODE ---
+.vscode/
+*.code-workspace
+
+# --- DATASETS Y PARQUETS ---
+layer/raw/*.csv
+layer/bronze/*.parquet
+layer/silver/*.parquet
+layer/gold/*.parquet
+
+# --- IMÁGENES GENERADAS POR EL PROCESO ---
+layer/gold/*.png
+
+# --- LOGS ---
+*.log
+logs/
+airflow/logs/
+
+# --- AIRFLOW ---
+airflow/airflow.db
+airflow/airflow.cfg
+airflow/webserver_config.py
+airflow/*.pid
+
+# Si usas la carpeta estándar "dags", excluir logs internos
+airflow/dags/__pycache__/
+
+# --- DOCKER ---
+*.bak
+*.tmp
+docker-data/
+docker-volume/
+docker-compose.override.yaml
+
+# --- SISTEMA OPERATIVO ---
+Thumbs.db
+.DS_Store
+
+# --- GIT ---
+.git/
